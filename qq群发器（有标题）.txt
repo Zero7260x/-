@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<Windows.h>
+#define  _CRT_SECURE_NO_WARNINGS
+int main()
+{	
+	for (int i= 0; i < 1; i++)
+	{
+		HWND hWnd = FindWindowA(NULL, "QQ");//获取句柄
+		SendMessage(hWnd, WM_KEYDOWN, VK_RETURN, 0);//打开聊天窗
+
+		keybd_event(VK_CONTROL, 0, 0, 0);//键盘事件，VK_CONTROL代表Ctrl键
+		keybd_event(0x56, 0, 0, 0);//v键
+		Sleep(100);
+		keybd_event(0x56, 0, KEYEVENTF_KEYUP, 0);
+		keybd_event(VK_CONTROL, 0, KEYEVENTF_KEYUP, 0);//松开
+		Sleep(100);
+		SendMessage(hWnd, WM_KEYDOWN, VK_DOWN, 0);//下一个人
+	}
+};
+//在visual studio中使用，若记不清函数的具体用法，按F1查看详情
