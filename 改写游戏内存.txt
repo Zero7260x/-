@@ -1,0 +1,20 @@
+#include<stdio.h>
+#include<Windows.h>
+#define  _CRT_SECURE_NO_WARNINGS
+int main()
+{	//获取进程ID
+	HWND hwnd = FindWindowA(NULL, "Cheat Engine 7.4");
+	int ProcessId = 0;
+	GetWindowThreadProcessId(hwnd, &ProcessId);
+	//printf("pid=%d", ProcessId);
+	//获取相应的句柄
+	HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ProcessId);
+	//读取内存
+	int Buffer = 0;//存储读取的内存的变量
+	ReadProcessMemory(hProcess, "内存地址", &Buffer, 4, NULL);
+	//改写内存
+	int NewData = 999;//改写的数据
+	WriteProcessMemory(hProcess, "内存地址", &NewData, 4, NULL);
+	return 0;
+};
+Inuyasha~TAMASHI~  v2.2
