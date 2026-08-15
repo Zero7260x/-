@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<Windows.h>
+#define  _CRT_SECURE_NO_WARNINGS
+int main()
+{	
+	HWND hWnd = FindWindowA(NULL, "进程窗口标题");
+	if (hWnd == NULL)
+	{
+		int errorCode = GetLastError();
+		printf("获取窗口句柄失败！错误代码：%d\n", errorCode);
+	}
+	else
+	{
+		int ret =SetWindowTextA(hWnd, "Inuyasha");
+		if (ret != 0)
+		{
+			printf("窗口标题修改成功！\n");
+		}
+		else
+		{
+			int errorCode = GetLastError();
+			printf("窗口标题修改失败！错误代码：%d\n", errorCode);
+		}
+	}
+};
