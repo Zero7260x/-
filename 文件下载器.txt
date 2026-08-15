@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<Windows.h>
+#define  _CRT_SECURE_NO_WARNINGS
+#include<Urlmon.h>//不是所有api都在Windows.h中声明的，有些api需要包含其他头文件才能使用
+#pragma comment(lib, "Urlmon.lib")//链接库，若上面头文件仍然报错，可能是因为没有链接库，链接库的名字可以在msdn中查找
+int main()
+{
+	LPCTSTR szURL = "";
+	LPCTSTR szFileName = "C:\\Users\\Xqa\\Desktop\\test.jpg";
+	HRESULT ret = URLDownloadToFileA(NULL, szURL, szFileName, 0, NULL);
+	if (ret == S_OK)
+	{
+		printf("Download successful!\n");
+	}
+	else
+	{
+		printf("Download failed! Error code: %ld\n", ret);
+	}
+};
